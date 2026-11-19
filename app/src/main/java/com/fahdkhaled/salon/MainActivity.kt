@@ -188,6 +188,7 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(15.dp))
 
                         if (codeSent) {
+
                             OutlinedTextField(
                                 value = code,
                                 onValueChange = {
@@ -197,4 +198,40 @@ class MainActivity : ComponentActivity() {
                                 },
                                 label = { Text("كود التحقق") },
                                 keyboardOptions = KeyboardOptions(
-                                   
+                                    keyboardType = KeyboardType.Number
+                                ),
+                                singleLine = true
+                            )
+
+                            Spacer(modifier = Modifier.height(15.dp))
+
+                            Button(
+                                onClick = { verifyCode() },
+                                enabled = !loading
+                            ) {
+                                Text("تأكيد الكود")
+                            }
+
+                        } else {
+
+                            Button(
+                                onClick = { sendCode() },
+                                enabled = !loading
+                            ) {
+                                Text("إرسال كود التحقق")
+                            }
+                        }
+
+                        if (loading) {
+                            Spacer(modifier = Modifier.height(15.dp))
+
+                            CircularProgressIndicator(
+                                color = Color.White
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
